@@ -3,5 +3,10 @@
   "app.loading": "Carregando Apolo",
   "nav.practice": "Praticar",
   "nav.tools": "Ferramentas",
-  "nav.settings": "Configurações"
+  "nav.settings": "Configurações",
+  "settings.locale.label": "Idioma",
+  "settings.theme.label": "Tema",
+  "settings.theme.system": "Sistema",
+  "settings.theme.light": "Claro",
+  "settings.theme.dark": "Escuro"
 }
