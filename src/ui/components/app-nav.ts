@@ -41,31 +41,27 @@ class AppNav extends HTMLElement {
 
     this.innerHTML = `
       <nav class="app-nav" aria-label="Primary">
-        <a class="app-nav__brand" href="#${appRoutes[0].path}" aria-label="Apolo">
-          <i class="ic-music size-7" aria-hidden="true"></i>
-          <span>Apolo</span>
-        </a>
-        <div class="app-nav__links">
-          ${appRoutes
-            .map((route) => {
-              const isActive = route.path === currentPath;
-              const labelId = `${NAV_LABEL_ID_PREFIX}-${route.id}`;
-              const label = this.getText(route.titleKey, route.fallbackTitle);
+        ${appRoutes
+          .map((route) => {
+            const isActive = route.path === currentPath;
+            const labelId = `${NAV_LABEL_ID_PREFIX}-${route.id}`;
+            const label = this.getText(route.titleKey, route.fallbackTitle);
 
-              return `
-                <a
-                  class="app-nav__link${isActive ? " active" : ""}"
-                  href="#${route.path}"
-                  aria-current="${isActive ? "page" : "false"}"
-                  aria-labelledby="${labelId}"
-                >
-                  ${route.navIconHtml}
-                  <span id="${labelId}" class="app-nav__label">${label}</span>
-                </a>
-              `;
-            })
-            .join("")}
-        </div>
+            return `
+              <a
+                class="link tooltip${isActive ? " active" : ""}"
+                href="#${route.path}"
+                aria-current="${isActive ? "page" : "false"}"
+                aria-labelledby="${labelId}"
+                data-tooltip="${label}"
+                data-tooltip-position="right"
+              >
+                ${route.navIconHtml}
+                <span class="label">${label}</span>
+              </a>
+            `;
+          })
+          .join("")}
       </nav>
     `;
   }

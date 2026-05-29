@@ -22,9 +22,8 @@ class ToolsPage extends HTMLElement {
     document.title = `${title} | Apolo`;
     this.innerHTML = `
       <section class="app-page" aria-labelledby="tools-page-title">
-        <p class="app-page__eyebrow">Apolo</p>
-        <h1 id="tools-page-title" class="app-page__title">${title}</h1>
-        <div class="app-page__content"></div>
+        <h1 id="tools-page-title" class="title">${title}</h1>
+        <div class="content"></div>
       </section>
     `;
   }

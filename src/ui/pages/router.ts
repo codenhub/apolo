@@ -17,7 +17,7 @@ export const appRoutes: AppRoute[] = [
     path: "/practice",
     titleKey: "nav.practice",
     fallbackTitle: "Practice",
-    navIconHtml: `<i class="ic-music-2 app-nav__icon" aria-hidden="true"></i>`,
+    navIconHtml: `<i class="ic-music icon" aria-hidden="true"></i>`,
     pageTag: "practice-page",
   },
   {
@@ -25,7 +25,7 @@ export const appRoutes: AppRoute[] = [
     path: "/tools",
     titleKey: "nav.tools",
     fallbackTitle: "Tools",
-    navIconHtml: `<i class="ic-wrench app-nav__icon" aria-hidden="true"></i>`,
+    navIconHtml: `<i class="ic-wrench icon" aria-hidden="true"></i>`,
     pageTag: "tools-page",
   },
   {
@@ -33,7 +33,7 @@ export const appRoutes: AppRoute[] = [
     path: "/settings",
     titleKey: "nav.settings",
     fallbackTitle: "Settings",
-    navIconHtml: `<i class="ic-settings app-nav__icon" aria-hidden="true"></i>`,
+    navIconHtml: `<i class="ic-settings icon" aria-hidden="true"></i>`,
     pageTag: "settings-page",
   },
 ];
@@ -45,15 +45,15 @@ export const getCurrentRoutePath = (): string => {
 };
 
 export const startRouter = (root: HTMLElement): void => {
-  root.className = "app-shell";
+  root.className = "app";
   root.innerHTML = `
     <app-nav></app-nav>
-    <div class="app-shell__main" tabindex="-1"></div>
+    <div class="main"></div>
   `;
 
   const renderRoute = (): void => {
     const route = resolveRoute();
-    const outlet = root.querySelector<HTMLElement>(".app-shell__main");
+    const outlet = root.querySelector<HTMLElement>(".app > .main");
 
     if (outlet === null) {
       return;

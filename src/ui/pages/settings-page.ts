@@ -22,8 +22,7 @@ class SettingsPage extends HTMLElement {
     document.title = `${title} | Apolo`;
     this.innerHTML = `
       <section class="app-page" aria-labelledby="settings-page-title">
-        <p class="app-page__eyebrow">Apolo</p>
-        <h1 id="settings-page-title" class="app-page__title">${title}</h1>
+        <h1 id="settings-page-title" class="title">${title}</h1>
         <div class="app-page__content"></div>
       </section>
     `;
