@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@modules/*": ["./src/core/modules/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@helpers/*": ["./src/shared/helpers/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@scripts/*": ["./src/ui/scripts/*"],
+    },
+  },
+  "include": ["src", "vite.config.ts", "vitest.config.ts"],
+}
