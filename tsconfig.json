@@ -21,8 +21,8 @@
       "@shared/*": ["./src/shared/*"],
       "@helpers/*": ["./src/shared/helpers/*"],
       "@ui/*": ["./src/ui/*"],
-      "@scripts/*": ["./src/ui/scripts/*"],
-    },
+      "@scripts/*": ["./src/ui/scripts/*"]
+    }
   },
-  "include": ["src", "vite.config.ts", "vitest.config.ts"],
+  "include": ["src", "vite.config.ts", "vitest.config.ts"]
 }

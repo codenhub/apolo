@@ -1,7 +1,5 @@
-import { getI18nInstance } from "../scripts/i18n";
-import { translateOrFallback } from "../scripts/i18n/translate";
-import { appRoutes } from "../scripts/router/routes";
-import { getCurrentRoutePath } from "../scripts/router/url";
+import { i18n } from "../scripts/i18n/config";
+import { appRoutes, getCurrentRoutePath } from "../pages/router";
 
 const NAV_LABEL_ID_PREFIX = "app-nav-label";
 
@@ -21,23 +19,21 @@ class AppNav extends HTMLElement {
   }
 
   private addI18nListeners(): void {
-    try {
-      const i18n = getI18nInstance();
-      i18n.addEventListener("ready", this.onLocaleChange);
-      i18n.addEventListener("locale-change", this.onLocaleChange);
-    } catch {
-      window.addEventListener("i18n-ready", this.onLocaleChange, { once: true });
-    }
+    i18n.addEventListener("ready", this.onLocaleChange);
+    i18n.addEventListener("locale-change", this.onLocaleChange);
   }
 
   private removeI18nListeners(): void {
-    try {
-      const i18n = getI18nInstance();
-      i18n.removeEventListener("ready", this.onLocaleChange);
-      i18n.removeEventListener("locale-change", this.onLocaleChange);
-    } catch {
-      window.removeEventListener("i18n-ready", this.onLocaleChange);
+    i18n.removeEventListener("ready", this.onLocaleChange);
+    i18n.removeEventListener("locale-change", this.onLocaleChange);
+  }
+
+  private getText(key: string, fallback: string): string {
+    if (!i18n.ready) {
+      return fallback;
     }
+
+    return i18n.translate(key) ?? fallback;
   }
 
   private render(): void {
@@ -54,7 +50,7 @@ class AppNav extends HTMLElement {
             .map((route) => {
               const isActive = route.path === currentPath;
               const labelId = `${NAV_LABEL_ID_PREFIX}-${route.id}`;
-              const label = translateOrFallback(route.titleKey, route.fallbackTitle);
+              const label = this.getText(route.titleKey, route.fallbackTitle);
 
               return `
                 <a

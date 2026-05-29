@@ -1,22 +1,40 @@
-import { addPageI18nListeners, removePageI18nListeners, renderPage } from "./page-renderer";
-import { appRoutes } from "../scripts/router/routes";
+import { i18n } from "../scripts/i18n/config";
 
-const route = appRoutes[1];
+const PAGE_TITLE_KEY = "nav.tools";
+const PAGE_TITLE_FALLBACK = "Tools";
 
 class ToolsPage extends HTMLElement {
   private readonly onLocaleChange = (): void => this.render();
 
   connectedCallback(): void {
-    addPageI18nListeners(this.onLocaleChange);
+    i18n.addEventListener("ready", this.onLocaleChange);
+    i18n.addEventListener("locale-change", this.onLocaleChange);
     this.render();
   }
 
   disconnectedCallback(): void {
-    removePageI18nListeners(this.onLocaleChange);
+    i18n.removeEventListener("ready", this.onLocaleChange);
+    i18n.removeEventListener("locale-change", this.onLocaleChange);
   }
 
   private render(): void {
-    renderPage({ element: this, titleKey: route.titleKey, fallbackTitle: route.fallbackTitle, iconHtml: route.pageIconHtml });
+    const title = this.getText(PAGE_TITLE_KEY, PAGE_TITLE_FALLBACK);
+    document.title = `${title} | Apolo`;
+    this.innerHTML = `
+      <section class="app-page" aria-labelledby="tools-page-title">
+        <p class="app-page__eyebrow">Apolo</p>
+        <h1 id="tools-page-title" class="app-page__title">${title}</h1>
+        <div class="app-page__content"></div>
+      </section>
+    `;
+  }
+
+  private getText(key: string, fallback: string): string {
+    if (!i18n.ready) {
+      return fallback;
+    }
+
+    return i18n.translate(key) ?? fallback;
   }
 }
 
